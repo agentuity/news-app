@@ -1,0 +1,43 @@
+todo:
+  - Create new archive page
+    - Design archive page layout
+    - Implement archive data fetching
+    - Add archive route and navigation
+  - Add error handling
+    - Add error boundaries
+    - Implement graceful fallbacks
+  - Testing and optimization
+    - Test Redis integration
+    - Verify data mapping
+    - Check performance
+  - Enhance audio experience
+    - Add audio visualization
+    - Improve transitions
+    - Add keyboard controls
+
+in_progress: []
+
+done:
+  - Requirements clarification
+  - Project structure analysis
+  - Initial project planning and requirements gathering
+  - Update Story/NewsItem data model
+    - Remove engagement metrics (stars, likes, etc)
+    - Simplify to focus on core news content
+  - Create Story to NewsItem mapping function
+  - Implement new getNews() with Redis backend
+    - Filter to only published stories
+    - Limit to last 14 days
+  - Update UI components
+    - Simplify NewsCard component
+    - Remove engagement-related UI elements
+    - Update ClientNewsFeed for new data model
+    - Simplify SearchBar component
+    - Update DigestContent component
+    - Simplify NewsFeed component
+    - Update TrendingSidebar
+  - Restore audio experience
+    - Re-implement audio player components
+    - Integrate with podcast data source
+    - Add basic audio controls
+    - Restore audio-based navigation
