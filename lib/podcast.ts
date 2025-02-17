@@ -114,16 +114,57 @@ async function getLastNDays(days: number): Promise<PodcastTranscript[]> {
 	}
 
 	const responses = await pipeline.exec();
-	if (!responses) return [];
+	if (!responses) {
+		console.log("No responses from Redis pipeline");
+		return [];
+	}
 
-	return responses
-		.filter((response): response is string => response !== null)
+	console.log("Raw Redis responses:", JSON.stringify(responses, null, 2));
+
+	const validResponses = responses.filter((response) => {
+		if (response === null) {
+			console.log("Response is null");
+			return false;
+		}
+		return true;
+	});
+
+	console.log("Valid responses count:", validResponses.length);
+
+	return validResponses
 		.map((data) => {
 			try {
-				const parsed = PodcastTranscriptSchema.safeParse(JSON.parse(data));
-				return parsed.success ? parsed.data : null;
+				console.log(
+					`Processing data: ${typeof data === "string" ? data.slice(0, 100) : "non-string"}...`,
+				);
+
+				let parsed: unknown;
+				try {
+					parsed = typeof data === "string" ? JSON.parse(data) : data;
+					console.log("Parsed data type:", typeof parsed);
+				} catch (parseError) {
+					console.error("JSON parse error:", parseError);
+					return null;
+				}
+
+				if (!parsed || typeof parsed !== "object") {
+					console.log("Invalid parsed data:", parsed);
+					return null;
+				}
+
+				const result = PodcastTranscriptSchema.safeParse(parsed);
+
+				if (!result.success) {
+					console.error(
+						"Validation error for data:",
+						JSON.stringify(result.error.issues, null, 2),
+					);
+					return null;
+				}
+
+				return result.data;
 			} catch (error) {
-				console.error("Failed to parse podcast data:", error);
+				console.error("Processing error:", error);
 				return null;
 			}
 		})
