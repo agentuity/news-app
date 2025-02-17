@@ -1,10 +1,10 @@
-import { Header } from "@/components/Header";
 import { ClientNewsFeed } from "@/components/ClientNewsFeed";
-import { stories } from "@/lib/stories";
+import { Header } from "@/components/Header";
 import { mapStoriesToNewsItems } from "@/lib/mappers";
-import { podcast } from "@/lib/podcast";
-import type { NewsItem } from "@/lib/types";
 import type { PodcastTranscript } from "@/lib/podcast";
+import { podcast } from "@/lib/podcast";
+import { stories } from "@/lib/stories";
+import type { NewsItem } from "@/lib/types";
 
 async function getNews(): Promise<NewsItem[]> {
 	// Get published stories from the last 14 days

@@ -1,10 +1,10 @@
 "use client";
 
-import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { PlayIcon, PauseIcon, StopCircleIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { PauseIcon, PlayIcon, StopCircleIcon } from "lucide-react";
+import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 
 interface AudioPlayerProps {
 	audioUrl?: string;

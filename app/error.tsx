@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { AlertCircle } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { AlertCircle } from "lucide-react";
+import { useEffect } from "react";
 
-export default function Error({
+export default function Page({
 	error,
 	reset,
 }: {
@@ -23,14 +23,12 @@ export default function Error({
 				<h2 className="text-lg font-semibold">Something went wrong!</h2>
 			</div>
 			<p className="text-muted-foreground text-sm max-w-[500px] text-center">
-				{error.message || 'An error occurred while loading the news feed. Please try again.'}
+				{error.message ||
+					"An error occurred while loading the news feed. Please try again."}
 			</p>
-			<Button
-				variant="outline"
-				onClick={reset}
-			>
+			<Button variant="outline" onClick={reset}>
 				Try again
 			</Button>
 		</div>
 	);
-} 
+}

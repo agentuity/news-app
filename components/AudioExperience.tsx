@@ -1,13 +1,13 @@
 "use client";
 
+import type { PodcastTranscript } from "@/lib/podcast";
+import type { NewsItem } from "@/lib/types";
+import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
-import { Button } from "./ui/button";
+import { useRef } from "react";
 import { AudioPlayer } from "./AudioPlayer";
 import { NewsCard } from "./NewsCard";
-import { motion, AnimatePresence } from "framer-motion";
-import { useRef } from "react";
-import type { NewsItem } from "@/lib/types";
-import type { PodcastTranscript } from "@/lib/podcast";
+import { Button } from "./ui/button";
 
 interface AudioExperienceProps {
 	audioUrl: string;

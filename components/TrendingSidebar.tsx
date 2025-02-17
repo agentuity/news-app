@@ -1,16 +1,21 @@
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GlobeIcon, ChevronDown, ChevronUp } from "lucide-react";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { TagIcon, FilterIcon } from "lucide-react";
-import { useState, useRef, useEffect, useCallback } from "react";
-import { cn } from "@/lib/utils";
 import type { NewsItem } from "@/lib/types";
+import { cn } from "@/lib/utils";
+import {
+	ChevronDown,
+	ChevronUp,
+	FilterIcon,
+	GlobeIcon,
+	TagIcon,
+} from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface TrendingSidebarProps {
 	news: NewsItem[];
@@ -90,7 +95,7 @@ export function TrendingSidebar({
 						variant={
 							selectedTags.includes(tag.toLowerCase()) ? "default" : "outline"
 						}
-						className="font-mono cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors"
+						className="cursor-pointer hover:bg-accent hover:text-accent-foreground transition-colors"
 						onClick={() => onTagSelect(tag.toLowerCase())}
 					>
 						#{tag.toLowerCase()}
@@ -171,7 +176,7 @@ export function TrendingSidebar({
 			<div className="hidden md:block space-y-6 w-80 flex-shrink-0">
 				<Card>
 					<CardHeader>
-						<CardTitle className="text-lg font-mono">Tags</CardTitle>
+						<CardTitle className="text-lg">Tags</CardTitle>
 					</CardHeader>
 					<CardContent>
 						<TagsContent />
@@ -180,9 +185,7 @@ export function TrendingSidebar({
 
 				<Card>
 					<CardHeader>
-						<CardTitle className="text-lg font-mono">
-							Filter by Source
-						</CardTitle>
+						<CardTitle className="text-lg">Filter by Source</CardTitle>
 					</CardHeader>
 					<CardContent>
 						<SourcesContent />

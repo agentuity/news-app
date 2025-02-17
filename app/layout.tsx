@@ -1,26 +1,24 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import { ThemeProvider } from "next-themes";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Agentuity News",
-  description: "News for the future",
+	title: "Agentuity News",
+	description: "News for the future",
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`antialiased`}
-      >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+	return (
+		<html lang="en">
+			<body className="antialiased">
+				<ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+					{children}
+				</ThemeProvider>
+			</body>
+		</html>
+	);
 }

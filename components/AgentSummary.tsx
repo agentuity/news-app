@@ -1,6 +1,5 @@
 import { Card } from "@/components/ui/card";
 import { AgentHeader } from "./AgentHeader";
-import { DigestContent } from "./DigestContent";
 import { ListenButton } from "./ListenButton";
 
 import type { NewsItem } from "@/lib/types";
@@ -23,7 +22,7 @@ export const AgentSummary = ({
 
 	return (
 		<div className="top-8 z-10">
-			<Card className="p-6 mb-8 bg-card shadow-lg transition-all duration-300 hover:shadow-xl border-2 border-accent/20 hover:border-accent/40 backdrop-blur-sm">
+			<Card className="p-6 mb-8 bg-card border border-accent/20">
 				<AgentHeader />
 
 				<div className="space-y-4">

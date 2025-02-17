@@ -1,16 +1,16 @@
+import { Badge } from "@/components/ui/badge";
 import {
 	Card,
 	CardContent,
+	CardFooter,
 	CardHeader,
 	CardTitle,
-	CardFooter,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { formatDate } from "@/lib/utils/dates";
 import { CalendarIcon, TagIcon } from "lucide-react";
+import { useState } from "react";
 import { SourceBadge } from "./SourceBadge";
 import { Button } from "./ui/button";
-import { useState } from "react";
-import { formatDate } from "@/lib/utils/dates";
 
 function cleanSourceName(source: string): string {
 	// Remove protocol and www
@@ -46,7 +46,7 @@ export function NewsCard({
 	return (
 		<Card id={`news-${id}`} className="news-card flex flex-col">
 			<CardHeader className="pb-3">
-				<CardTitle className="text-lg font-mono">
+				<CardTitle className="text-lg">
 					<a
 						href={link}
 						target="_blank"
@@ -81,7 +81,11 @@ export function NewsCard({
 					</div>
 					<div className="flex flex-wrap gap-2">
 						{tags.map((tag) => (
-							<Badge key={tag} variant="secondary" className="tag">
+							<Badge
+								key={tag}
+								variant="secondary"
+								className="tag cursor-default"
+							>
 								<TagIcon className="mr-1 h-3 w-3" />
 								{tag}
 							</Badge>

@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { PlayIcon } from "lucide-react";
 import { AudioExperience } from "@/components/AudioExperience";
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { usePodcast } from "@/lib/hooks/usePodcast";
-import { formatDate } from "@/lib/utils/dates";
 import type { PodcastTranscript } from "@/lib/podcast";
 import type { NewsItem } from "@/lib/types";
+import { formatDate } from "@/lib/utils/dates";
+import { PlayIcon } from "lucide-react";
+import { useState } from "react";
 
 interface ArchiveContentProps {
 	podcasts: PodcastTranscript[];
@@ -71,7 +71,7 @@ export function ArchiveContent({ podcasts }: ArchiveContentProps) {
 						<Card key={podcast.date_created}>
 							<CardHeader>
 								<div className="flex items-center justify-between">
-									<CardTitle className="text-xl font-mono">{dateStr}</CardTitle>
+									<CardTitle className="text-xl">{dateStr}</CardTitle>
 									{podcast.audio_url && (
 										<Button
 											variant="outline"

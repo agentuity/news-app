@@ -1,7 +1,7 @@
 import { ArchiveContent } from "@/components/ArchiveContent";
 import { Header } from "@/components/Header";
-import { podcast } from "@/lib/podcast";
 import type { PodcastTranscript } from "@/lib/podcast";
+import { podcast } from "@/lib/podcast";
 
 async function getArchivePodcasts(): Promise<PodcastTranscript[]> {
 	try {

@@ -5,9 +5,9 @@ export const Header = () => {
 	return (
 		<header className="space-y-2">
 			<div className="flex items-center justify-between gap-4">
-				<h1 className="text-2xl md:text-4xl font-bold font-mono">
+				<h1 className="text-2xl md:text-4xl font-bold">
 					<Link href="/">
-						<span className="text-[#F97316]">Agentuity</span>{" "}
+						<span className="text-accent">Agentuity</span>{" "}
 						<span className="text-foreground">News</span>
 					</Link>
 				</h1>

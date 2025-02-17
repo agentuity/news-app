@@ -54,8 +54,7 @@ const config: Config = {
 				},
 			},
 			fontFamily: {
-				mono: ["JetBrains Mono", "monospace"],
-				sans: ["Inter", "sans-serif"],
+				sans: ["Poppins", "sans-serif"],
 			},
 			borderRadius: {
 				lg: "var(--radius)",

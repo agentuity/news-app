@@ -1,17 +1,17 @@
 "use client";
 
-import { useState } from "react";
-import { TrendingSidebar } from "@/components/TrendingSidebar";
-import { SearchBar } from "@/components/SearchBar";
 import { AgentSummary } from "@/components/AgentSummary";
-import { NewsFeed } from "@/components/NewsFeed";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { usePodcast } from "@/lib/hooks/usePodcast";
 import { AudioExperience } from "@/components/AudioExperience";
+import { NewsFeed } from "@/components/NewsFeed";
+import { SearchBar } from "@/components/SearchBar";
+import { TrendingSidebar } from "@/components/TrendingSidebar";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { usePodcast } from "@/lib/hooks/usePodcast";
 import type { PodcastTranscript } from "@/lib/podcast";
 import type { NewsItem } from "@/lib/types";
+import { useState } from "react";
 
 interface ClientNewsFeedProps {
 	initialNews: NewsItem[];
