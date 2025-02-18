@@ -43,8 +43,20 @@ type PodcastTranscriptInput = {
 	audio_url?: string;
 };
 
+// Helper function to normalize dates to UTC midnight
+function normalizeDate(date: Date): Date {
+	// Get the local date components
+	const year = date.getFullYear();
+	const month = date.getMonth();
+	const day = date.getDate();
+
+	// Create a new date at local midnight
+	return new Date(year, month, day);
+}
+
 function getKey(date: Date): string {
-	const dateStr = date.toISOString().split("T")[0];
+	const normalizedDate = normalizeDate(date);
+	const dateStr = normalizedDate.toISOString().split("T")[0];
 	return `${PREFIX}:${dateStr}`;
 }
 
@@ -52,7 +64,7 @@ async function save(
 	transcript: PodcastTranscriptInput,
 	stories: Story[],
 ): Promise<PodcastTranscript> {
-	const key = getKey(new Date());
+	const key = getKey(normalizeDate(new Date()));
 
 	const podcastData: PodcastTranscript = {
 		...transcript,
@@ -71,7 +83,7 @@ async function save(
 }
 
 async function getByDate(date: Date): Promise<PodcastTranscript | null> {
-	const key = getKey(date);
+	const key = getKey(normalizeDate(date));
 	const data = await redis.get<string>(key);
 
 	if (!data) return null;
@@ -100,11 +112,11 @@ async function getLatest(): Promise<PodcastTranscript | null> {
 
 async function getLastNDays(days: number): Promise<PodcastTranscript[]> {
 	const keys = [];
-	const now = new Date();
+	const now = normalizeDate(new Date());
 
 	for (let i = 0; i < days; i++) {
 		const date = new Date(now);
-		date.setDate(date.getDate() - i);
+		date.setUTCDate(date.getUTCDate() - i);
 		keys.push(getKey(date));
 	}
 
