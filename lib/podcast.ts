@@ -107,7 +107,10 @@ async function getByDate(date: Date): Promise<PodcastTranscript | null> {
 }
 
 async function getLatest(): Promise<PodcastTranscript | null> {
-	return getByDate(new Date());
+	const recentPodcasts = await getLastNDays(7);
+
+	// Return the most recent podcast or null if none exist
+	return recentPodcasts.length > 0 ? recentPodcasts[0] : null;
 }
 
 async function getLastNDays(days: number): Promise<PodcastTranscript[]> {
