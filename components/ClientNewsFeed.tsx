@@ -12,6 +12,7 @@ import { usePodcast } from "@/lib/hooks/usePodcast";
 import type { PodcastTranscript } from "@/lib/podcast";
 import type { NewsItem } from "@/lib/types";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 interface ClientNewsFeedProps {
 	initialNews: NewsItem[];
@@ -22,6 +23,9 @@ export function ClientNewsFeed({ initialNews, podcast }: ClientNewsFeedProps) {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [selectedTags, setSelectedTags] = useState<string[]>([]);
 	const [selectedSources, setSelectedSources] = useState<string[]>([]);
+	const [news, setNews] = useState<NewsItem[]>(initialNews);
+	const [daysLoaded, setDaysLoaded] = useState(1);
+	const [isLoadingMore, setIsLoadingMore] = useState(false);
 
 	const {
 		isPlaying,
@@ -38,7 +42,21 @@ export function ClientNewsFeed({ initialNews, podcast }: ClientNewsFeedProps) {
 		},
 	} = usePodcast({ news: initialNews, podcast });
 
-	const filteredNews = initialNews.filter((news) => {
+	const loadMore = async () => {
+		setIsLoadingMore(true);
+		try {
+			const nextDaysToLoad = daysLoaded + 1; // Load next 1 days
+			const response = await fetch(`/api/news?days=${nextDaysToLoad}`);
+			const moreNews = await response.json();
+			setNews(moreNews);
+			setDaysLoaded(nextDaysToLoad);
+		} catch (error) {
+			console.error("Failed to load more news:", error);
+		}
+		setIsLoadingMore(false);
+	};
+
+	const filteredNews = news.filter((news) => {
 		const matchesSearch =
 			news.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
 			news.description.toLowerCase().includes(searchTerm.toLowerCase());
@@ -69,7 +87,7 @@ export function ClientNewsFeed({ initialNews, podcast }: ClientNewsFeedProps) {
 
 					<div className="block md:hidden">
 						<TrendingSidebar
-							news={initialNews}
+							news={news}
 							onTagSelect={(tag: string) => {
 								setSelectedTags((prev) =>
 									prev.includes(tag)
@@ -100,11 +118,29 @@ export function ClientNewsFeed({ initialNews, podcast }: ClientNewsFeedProps) {
 						activeNewsItem={activeNewsItem}
 						isAudioMode={isPlaying}
 					/>
+
+					{/* Load More Button */}
+					<div className="mt-8 flex justify-center">
+						<Button
+							variant="outline"
+							onClick={loadMore}
+							disabled={isLoadingMore}
+							className="w-full max-w-xs"
+						>
+							{isLoadingMore ? (
+								<>
+									<span className="mr-2">Loading...</span>
+								</>
+							) : (
+								"Load More Stories"
+							)}
+						</Button>
+					</div>
 				</div>
 
 				<div className="hidden md:block">
 					<TrendingSidebar
-						news={initialNews}
+						news={news}
 						onTagSelect={(tag: string) => {
 							setSelectedTags((prev) =>
 								prev.includes(tag)

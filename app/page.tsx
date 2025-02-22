@@ -7,12 +7,12 @@ import { stories } from "@/lib/stories";
 import type { NewsItem } from "@/lib/types";
 
 async function getNews(): Promise<NewsItem[]> {
-	// Get published stories from the last 14 days
-	const fourteenDaysAgo = new Date();
-	fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14);
+	// Get published stories from the last day initially
+	const oneDayAgo = new Date();
+	oneDayAgo.setDate(oneDayAgo.getDate() - 1);
 
 	try {
-		const publishedStories = await stories.getLastNDays(14, {
+		const publishedStories = await stories.getLastNDays(1, {
 			publishedOnly: true,
 		});
 		return mapStoriesToNewsItems(publishedStories);
